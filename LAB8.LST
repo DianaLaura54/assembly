@@ -1,0 +1,100 @@
+Turbo Assembler	 Version 3.0	    04/12/22 10:41:33	    Page 1
+lab8.asm
+
+
+
+      1	0000			     STACKK SEGMENT PARA 'STACKK'
+      2	0000  40*(53 54	41 43 4B  +   DB 64 DUP	('STACKK')
+      3	      4B)
+      4	0180			     STACKK ENDS
+      5	0000			     DATA SEGMENT PARA 'DATA'
+      6	0000  07D0*(20)		     TAMP DB 2000 DUP (' ')
+      7	07D0			     DATA ENDS
+      8				     INTIR MACRO TIME
+      9				      LOCAL P1,	P2
+     10				     PUSH DX
+     11				      PUSH CX
+     12				      MOV DX, TIME
+     13				     P1: MOV CX, 0FF00H
+     14				     P2: DEC CX
+     15				      JNZ P2
+     16				      DEC DX
+     17				      JNZ P1
+     18				      POP CX
+     19				      POP DX
+     20				      ENDM
+     21	0000			     MYCOD SEGMENT PARA	'CODE'
+     22	0000			     PROCED PROC FAR
+     23				      ASSUME CS:MYCOD, ES:DATA,	DS:DATA, SS:STACKK
+     24	0000  1E		      PUSH DS
+     25	0001  33 C0		      XOR AX,AX
+     26	0003  50		      PUSH AX
+     27	0004  B8 0000s		      MOV AX, DATA
+     28	0007  8E C0		      MOV ES, AX
+     29
+     30	0009  8E D8		      MOV DS,AX
+     31	000B  B9 0008		      MOV CX, 08H
+     32	000E  B3 00		      MOV BL, 00H
+     33	0010  BD 0000r		     LOOP1: LEA	BP, TAMP
+     34	0013  BA 0000		      MOV DX, 0000H
+     35
+     36	0016  B4 13		      MOV AH, 19
+     37	0018  B0 01		      MOV AL, 1
+     38	001A  51		      PUSH CX
+     39	001B  B9 07D0		      MOV CX, 07D0H
+     40	001E  CD 10		      INT 10H
+     41				      INTIR 10000
+1    42	0020  52		     PUSH DX
+1    43	0021  51		      PUSH CX
+1    44	0022  BA 2710		      MOV DX, 10000
+1    45	0025  B9 FF00		     ??0000: MOV CX, 0FF00H
+1    46	0028  49		     ??0001: DEC CX
+1    47	0029  75 FD		      JNZ ??0001
+1    48	002B  4A		      DEC DX
+1    49	002C  75 F7		      JNZ ??0000
+1    50	002E  59		      POP CX
+1    51	002F  5A		      POP DX
+     52	0030  80 C3 10		      ADD BL, 10H
+     53	0033  59		      POP CX
+     54	0034  E2 DA		      LOOP LOOP1
+     55	0036  CB		      RET
+     56	0037			     PROCED ENDP
+     57	0037			     MYCOD ENDS
+Turbo Assembler	 Version 3.0	    04/12/22 10:41:33	    Page 2
+lab8.asm
+
+
+
+     58				      END PROCED
+Turbo Assembler	 Version 3.0	    04/12/22 10:41:33	    Page 3
+Symbol Table
+
+
+
+
+Symbol Name			  Type	 Value
+
+??0000				  Near	 MYCOD:0025
+??0001				  Near	 MYCOD:0028
+??DATE				  Text	 "04/12/22"
+??FILENAME			  Text	 "lab8	  "
+??TIME				  Text	 "10:41:33"
+??VERSION			  Number 0300
+@CPU				  Text	 0101H
+@CURSEG				  Text	 MYCOD
+@FILENAME			  Text	 LAB8
+@WORDSIZE			  Text	 2
+LOOP1				  Near	 MYCOD:0010
+PROCED				  Far	 MYCOD:0000
+TAMP				  Byte	 DATA:0000
+
+Macro Name
+
+INTIR
+
+Groups & Segments		  Bit Size Align  Combine Class
+
+DATA				  16  07D0 Para	  none	  DATA
+MYCOD				  16  0037 Para	  none	  CODE
+STACKK				  16  0180 Para	  none	  STACKK
+

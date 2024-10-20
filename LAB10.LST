@@ -1,0 +1,134 @@
+Turbo Assembler	 Version 3.0	    05/03/22 17:21:21	    Page 1
+lab10.asm
+
+
+
+      1	0000			     DATA SEGMENT PARA PUBLIC 'DATA'
+      2	0000			     DATA ENDS
+      3
+      4				     SQUARE MACRO x, dim, col
+      5				     LOCAL l1, l2
+      6					     MOV DX, x
+      7					     l1:
+      8						     MOV CX, x
+      9						     l2:
+     10							     MOV AH, 0CH
+     11							     MOV AL, col
+     12							     INT 10H
+     13							     INC CX
+     14							     CMP CX, dim
+     15							     JLE l2
+     16						     INC DX
+     17						     CMP DX, dim
+     18						     JLE l1
+     19				     ENDM
+     20
+     21	0000			     CODE SEGMENT PARA PUBLIC 'CODE'
+     22				     ASSUME CS:CODE, ES:DATA
+     23	0000			     START PROC	FAR
+     24
+     25	0000  1E			     PUSH DS
+     26	0001  33 C0			     XOR AX,AX
+     27	0003  50			     PUSH AX
+     28	0004  B8 0000s			     MOV AX,DATA
+     29	0007  8E D8			     MOV DS,AX
+     30
+     31	0009  B4 0F			     MOV AH, 0FH
+     32	000B  CD 10			     INT 10H
+     33
+     34	000D  50			     PUSH AX
+     35	000E  53			     PUSH BX
+     36
+     37	000F  B4 00			     MOV AH, 00H
+     38	0011  B0 12			     MOV AL, 12H
+     39	0013  CD 10			     INT 10H
+     40
+     41					     SQUARE 20,	90, 8
+1    42	0015  BA 0014			     MOV DX, 20
+1    43	0018				     ??0000:
+1    44	0018  B9 0014				     MOV CX, 20
+1    45	001B					     ??0001:
+1    46	001B  B4 0C					     MOV AH, 0CH
+1    47	001D  B0 08					     MOV AL, 8
+1    48	001F  CD 10					     INT 10H
+1    49	0021  41					     INC CX
+1    50	0022  83 F9 5A					     CMP CX, 90
+1    51	0025  7E F4					     JLE ??0001
+1    52	0027  42				     INC DX
+1    53	0028  83 FA 5A				     CMP DX, 90
+1    54	002B  7E EB				     JLE ??0000
+     55					     SQUARE 80,	120, 9
+1    56	002D  BA 0050			     MOV DX, 80
+1    57	0030				     ??0002:
+Turbo Assembler	 Version 3.0	    05/03/22 17:21:21	    Page 2
+lab10.asm
+
+
+
+1    58	0030  B9 0050				     MOV CX, 80
+1    59	0033					     ??0003:
+1    60	0033  B4 0C					     MOV AH, 0CH
+1    61	0035  B0 09					     MOV AL, 9
+1    62	0037  CD 10					     INT 10H
+1    63	0039  41					     INC CX
+1    64	003A  83 F9 78					     CMP CX, 120
+1    65	003D  7E F4					     JLE ??0003
+1    66	003F  42				     INC DX
+1    67	0040  83 FA 78				     CMP DX, 120
+1    68	0043  7E EB				     JLE ??0002
+     69					     SQUARE 100, 150, 10
+1    70	0045  BA 0064			     MOV DX, 100
+1    71	0048				     ??0004:
+1    72	0048  B9 0064				     MOV CX, 100
+1    73	004B					     ??0005:
+1    74	004B  B4 0C					     MOV AH, 0CH
+1    75	004D  B0 0A					     MOV AL, 10
+1    76	004F  CD 10					     INT 10H
+1    77	0051  41					     INC CX
+1    78	0052  81 F9 0096				     CMP CX, 150
+1    79	0056  7E F3					     JLE ??0005
+1    80	0058  42				     INC DX
+1    81	0059  81 FA 0096			     CMP DX, 150
+1    82	005D  7E E9				     JLE ??0004
+     83	005F  58			     POP AX
+     84	0060  B4 00			     MOV AH, 00H
+     85	0062  5B			     POP BX
+     86	0063  B4 4C			     MOV AH, 4CH
+     87	0065  CD 21			     INT 21H
+     88
+     89	0067			     START ENDP
+     90	0067			     CODE ENDS
+     91				     END START
+Turbo Assembler	 Version 3.0	    05/03/22 17:21:21	    Page 3
+Symbol Table
+
+
+
+
+Symbol Name			  Type	 Value
+
+??0000				  Near	 CODE:0018
+??0001				  Near	 CODE:001B
+??0002				  Near	 CODE:0030
+??0003				  Near	 CODE:0033
+??0004				  Near	 CODE:0048
+??0005				  Near	 CODE:004B
+??DATE				  Text	 "05/03/22"
+??FILENAME			  Text	 "lab10	  "
+??TIME				  Text	 "17:21:21"
+??VERSION			  Number 0300
+@CPU				  Text	 0101H
+@CURSEG				  Text	 CODE
+@FILENAME			  Text	 LAB10
+@WORDSIZE			  Text	 2
+START				  Far	 CODE:0000
+
+Macro Name
+
+SQUARE
+
+Groups & Segments		  Bit Size Align  Combine Class
+
+CODE				  16  0067 Para	  Public  CODE
+DATA				  16  0000 Para	  Public  DATA
+

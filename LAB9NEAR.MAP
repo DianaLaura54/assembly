@@ -1,0 +1,10 @@
+
+ Start  Stop   Length Name               Class
+
+ 00000H 00000H 00000H DATE               DATA
+ 00000H 003FFH 00400H STAC               STACK
+ 00400H 0041CH 0001DH COD1               CODE
+
+Undefined symbol 'PROCED' in module LAB9NEAR2.ASM
+Program entry point at 0040:0000
+

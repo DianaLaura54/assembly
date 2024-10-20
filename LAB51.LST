@@ -1,0 +1,59 @@
+Turbo Assembler	 Version 3.0	    03/17/22 19:30:39	    Page 1
+lab51.asm
+
+
+
+      1	0000			     DATA SEGMENT PARA PUBLIC 'DATA'
+      2	0000			     DATA ENDS
+      3	0000			     CODE SEGMENT PARA PUBLIC 'CODE'
+      4				     ASSUME CS:CODE, DS:DATA
+      5	0000			     START PROC	FAR
+      6	0000  1E		     PUSH DS
+      7	0001  33 C0		     XOR AX,AX
+      8	0003  50		     PUSH AX
+      9	0004  B8 0000s		     MOV AX,DATA
+     10	0007  8E D8		     MOV DS, AX
+     11
+     12	0009  B8 0014		     MOV AX, 20
+     13	000C  BB 000F		     MOV BX, 15
+     14	000F  8B C8		     MOV CX, AX
+     15	0011  D1 E0		     SHL AX, 1
+     16	0013  03 C8		     ADD CX, AX
+     17	0015  D1 E0		     SHL AX, 1
+     18	0017  03 C8		     ADD CX, AX
+     19	0019  D1 E3		     SHL BX, 1
+     20	001B  8B C1		     MOV AX, CX
+     21	001D  2B C3		     SUB AX, BX
+     22	001F  D1 EB D1 EB D1 EB	D1+  SHR BX, 4
+     23	      EB
+     24	0027  2B C3		     SUB AX, BX
+     25
+     26	0029  CB		     RET
+     27	002A			     START ENDP
+     28
+     29	002A			     CODE ENDS
+     30
+     31				     END START
+Turbo Assembler	 Version 3.0	    03/17/22 19:30:39	    Page 2
+Symbol Table
+
+
+
+
+Symbol Name			  Type	 Value
+
+??DATE				  Text	 "03/17/22"
+??FILENAME			  Text	 "lab51	  "
+??TIME				  Text	 "19:30:39"
+??VERSION			  Number 0300
+@CPU				  Text	 0101H
+@CURSEG				  Text	 CODE
+@FILENAME			  Text	 LAB51
+@WORDSIZE			  Text	 2
+START				  Far	 CODE:0000
+
+Groups & Segments		  Bit Size Align  Combine Class
+
+CODE				  16  002A Para	  Public  CODE
+DATA				  16  0000 Para	  Public  DATA
+

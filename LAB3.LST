@@ -1,0 +1,65 @@
+Turbo Assembler	 Version 3.0	    03/10/22 10:18:37	    Page 1
+lab3.asm
+
+
+
+      1	0000			     DATA SEGMENT PARA PUBLIC 'DATA'
+      2	0000  2710		     NO1 DW 10000
+      3	0002  4E20		     NO2 DW 20000
+      4	0004  7530		     NO3 DW 30000
+      5	0006  9C40		     NO4 DW 40000
+      6	0008  00000000		     SUM DD 0
+      7	000C			     DATA ENDS
+      8	0000			     CODE SEGMENT PARA PUBLIC 'CODE'
+      9				     ASSUME CS:CODE, DS:DATA
+     10	0000			     START PROC	FAR
+     11	0000  1E		     PUSH DS
+     12	0001  33 C0		     XOR AX,AX
+     13	0003  50		     PUSH AX
+     14	0004  B8 0000s		     MOV AX,DATA
+     15	0007  8E D8		     MOV DS,AX
+     16	0009  03 06 0000r	     ADD AX,NO1
+     17	000D  03 06 0002r	     ADD AX,NO2
+     18	0011  03 06 0004r	     ADD AX,NO3
+     19	0015  03 06 0006r	     ADD AX,NO4
+     20	0019  A3 0008r		     MOV SUM, AX
+**Error** lab3.asm(20) Operand types do	not match
+     21
+     22	001C  CB		     RET
+     23	001D			     START ENDP
+     24	001D			     CODE ENDS
+     25				     END START
+Turbo Assembler	 Version 3.0	    03/10/22 10:18:37	    Page 2
+Symbol Table
+
+
+
+
+Symbol Name			  Type	 Value
+
+??DATE				  Text	 "03/10/22"
+??FILENAME			  Text	 "lab3	  "
+??TIME				  Text	 "10:18:37"
+??VERSION			  Number 0300
+@CPU				  Text	 0101H
+@CURSEG				  Text	 CODE
+@FILENAME			  Text	 LAB3
+@WORDSIZE			  Text	 2
+NO1				  Word	 DATA:0000
+NO2				  Word	 DATA:0002
+NO3				  Word	 DATA:0004
+NO4				  Word	 DATA:0006
+START				  Far	 CODE:0000
+SUM				  Dword	 DATA:0008
+
+Groups & Segments		  Bit Size Align  Combine Class
+
+CODE				  16  001D Para	  Public  CODE
+DATA				  16  000C Para	  Public  DATA
+Turbo Assembler	 Version 3.0	    03/10/22 10:18:37	    Page 3
+Error Summary
+
+
+
+**Error** lab3.asm(20) Operand types do	not match
+

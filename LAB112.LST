@@ -1,0 +1,63 @@
+Turbo Assembler	 Version 3.0	    05/11/22 12:01:17	    Page 1
+lab112.asm
+
+
+
+      1	0000			     DATA SEGMENT PARA PUBLIC 'DATA'
+      2	0000  40400000			     THREE DD 3.0
+      3	0004  ????????????????		     RESULT DQ ?
+      4	000C			     DATA ENDS
+      5
+      6	0000			     STCK SEGMENT PARA STACK 'stack'
+      7	0000  40*(6D 79	5F 73 74  +	     DB	64 DUP ('my_stack')  ;
+      8	      61 63 6B)
+      9	0200			     STCK ENDS
+     10
+     11	0000			     CODE SEGMENT PARA PUBLIC 'CODE'
+     12				     ASSUME CS:CODE, DS:DATA, SS:STCK
+     13	0000			     START  PROC FAR
+     14	0000  1E			     PUSH DS
+     15	0001  33 C0			     XOR AX,AX
+     16	0003  50			     PUSH AX
+     17	0004  B8 0000s			     MOV AX,DATA
+     18	0007  8E D8			     MOV DS,AX
+     19
+     20	0009  9B DB E3			     FINIT
+     21	000C  9B D9 E8			     FLD1
+     22	000F  9B D8 36 0000r		     FDIV THREE
+     23	0014  9B D9 F0			     F2XM1
+     24	0017  9B D9 E8			     FLD1
+     25	001A  9B DE C1			     FADD
+     26	001D  9B DD 1E 0004r		     FSTP RESULT
+     27	0022  9B			     FWAIT
+     28
+     29	0023  CB			     RET
+     30	0024			     START  ENDP
+     31	0024			     CODE ENDS
+     32				     END  START
+Turbo Assembler	 Version 3.0	    05/11/22 12:01:17	    Page 2
+Symbol Table
+
+
+
+
+Symbol Name			  Type	 Value
+
+??DATE				  Text	 "05/11/22"
+??FILENAME			  Text	 "lab112  "
+??TIME				  Text	 "12:01:17"
+??VERSION			  Number 0300
+@CPU				  Text	 0101H
+@CURSEG				  Text	 CODE
+@FILENAME			  Text	 LAB112
+@WORDSIZE			  Text	 2
+RESULT				  Qword	 DATA:0004
+START				  Far	 CODE:0000
+THREE				  Dword	 DATA:0000
+
+Groups & Segments		  Bit Size Align  Combine Class
+
+CODE				  16  0024 Para	  Public  CODE
+DATA				  16  000C Para	  Public  DATA
+STCK				  16  0200 Para	  Stack	  STACK
+

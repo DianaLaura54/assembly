@@ -1,0 +1,80 @@
+Turbo Assembler	 Version 3.0	    04/03/22 19:48:09	    Page 1
+temalab6.asm
+
+
+
+      1	0000			     DATA SEGMENT PARA PUBLIC 'DATA'
+      2
+      3	0000			     DATA ENDS
+      4
+      5
+      6	0000			     CODE SEGMENT PARA PUBLIC 'CODE'
+      7
+      8				     ASSUME CS:CODE, DS:DATA
+      9	0000			     START PROC	FAR
+     10	0000  1E		     PUSH DS
+     11
+     12	0001  33 C0		     XOR AX,AX
+     13	0003  50		     PUSH AX
+     14	0004  B8 0000s		     MOV AX,DATA
+     15	0007  8E D8		     MOV DS,AX
+     16
+     17				     ;OTHER PROGRAM INSTRUCTIONS
+     18
+     19	0009  B8 0014		     MOV AX, 20
+     20	000C  BB 000A		     MOV BX, 10
+     21
+     22	000F  50		     PUSH AX
+     23	0010  53		     PUSH BX
+     24
+     25	0011  83 EC 07		     SUB SP,7
+     26	0014  8B EC		     MOV BP, SP
+     27
+     28	0016  8B 46 0E		     MOV AX, [BP+14]
+     29	0019  89 46 0A		     MOV [BP+10], AX
+     30
+     31	001C  8B 46 0C		     MOV AX, [BP+12]
+     32	001F  89 46 00		     MOV [BP], AX
+     33
+     34	0022  58		     POP AX
+     35	0023  58		     POP AX
+     36	0024  58		     POP AX
+     37	0025  58		     POP AX
+     38	0026  58		     POP AX
+     39	0027  58		     POP AX
+     40	0028  58		     POP AX
+     41	0029  58		     POP AX
+     42	002A  58		     POP AX
+     43	002B  58		     POP AX
+     44	002C  58		     POP AX
+     45	002D  58		     POP AX
+     46
+     47
+     48	002E  B4 4C		     MOV AH, 4CH
+     49	0030  CD 21		     INT 21H
+     50	0032			     START ENDP
+     51	0032			     CODE ENDS
+     52				     END START
+Turbo Assembler	 Version 3.0	    04/03/22 19:48:09	    Page 2
+Symbol Table
+
+
+
+
+Symbol Name			  Type	 Value
+
+??DATE				  Text	 "04/03/22"
+??FILENAME			  Text	 "temalab6"
+??TIME				  Text	 "19:48:09"
+??VERSION			  Number 0300
+@CPU				  Text	 0101H
+@CURSEG				  Text	 CODE
+@FILENAME			  Text	 TEMALAB6
+@WORDSIZE			  Text	 2
+START				  Far	 CODE:0000
+
+Groups & Segments		  Bit Size Align  Combine Class
+
+CODE				  16  0032 Para	  Public  CODE
+DATA				  16  0000 Para	  Public  DATA
+

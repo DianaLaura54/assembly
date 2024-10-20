@@ -1,0 +1,70 @@
+Turbo Assembler	 Version 3.0	    04/11/22 22:03:31	    Page 1
+lab75.asm
+
+
+
+      1	0000			     DATA SEGMENT PARA PUBLIC 'DATA'
+      2	0000  08*(??)		     NRS DB 8 DUP(?)
+      3	0008			     DATA ENDS
+      4	0000			     CODE SEGMENT PARA PUBLIC 'CODE'
+      5	0000			     START PROC	FAR
+      6				     ASSUME CS:CODE, DS:DATA
+      7	0000  1E		     PUSH DS
+      8	0001  33 C0		     XOR AX,AX
+      9	0003  50		     PUSH AX
+     10	0004  B8 0000s		     MOV AX,DATA;
+     11	0007  8E D8		     MOV DS, AX
+     12	0009  33 F6		     XOR SI,SI
+     13	000B  B8 0078		     MOV AX, 120
+     14	000E  B9 000A		     MOV CX, 10
+     15	0011			     NEXT1:
+     16	0011  99		     CWD
+     17	0012  F7 F1		     DIV CX
+     18	0014  88 94 0000r	     MOV NRS[SI], DL
+     19	0018  80 84 0000r 30	     ADD NRS[SI], '0'
+     20	001D  46		     INC SI
+     21	001E  3D 0000		     CMP AX, 0
+     22	0021  75 EE		     JNE NEXT1
+     23
+     24	0023  8B CE		     MOV CX, SI
+     25	0025  B4 02		     MOV AH, 02H
+     26	0027  4E		     DEC SI
+     27
+     28	0028  8A 94 0000r	     NEXT2: MOV	DL, NRS[SI]
+     29	002C  CD 21		     INT 21H
+     30	002E  4E		     DEC SI
+     31	002F  E2 F7		     LOOP NEXT2
+     32
+     33
+     34	0031  CB		     RET
+     35	0032			     START ENDP
+     36
+     37	0032			     CODE ENDS
+     38
+     39				     END START
+Turbo Assembler	 Version 3.0	    04/11/22 22:03:31	    Page 2
+Symbol Table
+
+
+
+
+Symbol Name			  Type	 Value
+
+??DATE				  Text	 "04/11/22"
+??FILENAME			  Text	 "lab75	  "
+??TIME				  Text	 "22:03:31"
+??VERSION			  Number 0300
+@CPU				  Text	 0101H
+@CURSEG				  Text	 CODE
+@FILENAME			  Text	 LAB75
+@WORDSIZE			  Text	 2
+NEXT1				  Near	 CODE:0011
+NEXT2				  Near	 CODE:0028
+NRS				  Byte	 DATA:0000
+START				  Far	 CODE:0000
+
+Groups & Segments		  Bit Size Align  Combine Class
+
+CODE				  16  0032 Para	  Public  CODE
+DATA				  16  0008 Para	  Public  DATA
+

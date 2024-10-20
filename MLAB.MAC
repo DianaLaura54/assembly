@@ -1,0 +1,101 @@
+DELETE MACRO 
+push ax 
+push bx 
+push cx 
+push dx 
+push es 
+push bp 
+mov AX, SEGDATA 
+mov ES, AX
+mov AX, offset tamp 
+mov BP, AX 
+mov AH, 13h 
+mov AL, 01h 
+mov BL, 07h
+ mov CX, 07D0h 
+mov DX, 0000h 
+int 10h 
+pop bp 
+pop es 
+pop dx 
+pop cx
+ pop bx 
+pop ax 
+ENDM
+
+CURSOR MACRO 
+POS push ax
+ push bx 
+push dx 
+push di 
+push si 
+push bp 
+mov DX, POS 
+mov AH, 02h
+ mov BH, 00h 
+int 10h 
+pop bp 
+pop si 
+pop di 
+pop dx 
+pop bx 
+pop ax 
+ENDM
+
+
+CURSOR MACRO POS 
+push ax 
+push bx
+ push dx 
+push di 
+push si 
+push bp 
+mov DX, POS 
+mov AH, 02h
+ mov BH, 00h 
+int 10h 
+pop bp 
+pop si 
+pop di 
+pop dx 
+pop bx
+ pop ax
+ ENDM
+
+TYPECAR MACRO MES 
+push ax 
+push dx 
+mov AH, 09h 
+mov DX, offset MES 
+int 21h 
+pop dx 
+pop ax
+ ENDM
+
+TYPENUM MACRO 
+push AX 
+push DX 
+mov DX, AX 
+add DL, '0'
+ mov AH, 02h 
+int 21h 
+pop DX 
+pop AX 
+ENDM
+
+
+
+INTIR MACRO TIME
+LOCAL P1, P2 ;;p1 and p2 are local labels
+PUSH DX ;;saves dx and cx registers
+PUSH CX
+MOV DX, TIME ;; loads a delay in dx
+P1: MOV CX, 0FF00H;;loads cx with 0FF00h
+;;counts
+P2: DEC CX ;;delays by decrementing cx
+JNZ P2 ;;if cx!=0 continue
+DEC DX ;;if cx=0 decrements dx
+JNZ P1 ;;if dx!=0 loads again cx
+POP CX ;;if dx=0 remake cx and dx
+POP DX ;;
+ENDM ;;end macro

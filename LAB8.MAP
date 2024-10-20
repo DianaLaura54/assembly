@@ -1,0 +1,10 @@
+
+ Start  Stop   Length Name               Class
+
+ 00000H 0017FH 00180H STACKK             STACKK
+ 00180H 0094FH 007D0H DATA               DATA
+ 00950H 00986H 00037H MYCOD              CODE
+
+Program entry point at 0095:0000
+Warning: no stack
+
